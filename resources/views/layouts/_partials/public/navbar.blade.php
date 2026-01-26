@@ -7,9 +7,9 @@
 
             <!-- Menu -->
             <nav class="flex items-center space-x-8 text-gray-700">
-                <a href="#" class="text-primary font-medium">HOME</a>
-                <a href="kategori.html" class="hover:text-primary">KATEGORI</a>
-                <a href="jurusan.html" class="flex items-center gap-2 hover:text-primary">JURUSAN</a>
+                <a href="{{ route('home')}}" class="text-primary font-medium">HOME</a>
+                <a href="{{ route('categories')}}" class="hover:text-primary">KATEGORI</a>
+                <a href="{{route('majors')}}" class="flex items-center gap-2 hover:text-primary">JURUSAN</a>
             </nav>
         </div>
     </header>
