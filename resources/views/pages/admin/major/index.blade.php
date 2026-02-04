@@ -3,30 +3,31 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="fw-bold mb-0">
-                <span class="text-muted fw-light"></span> Data Kategori Jurusan
+                <span class="text-muted fw-light"></span> Data Jurusan
             </h4>
             <a href="#" class="btn btn-primary">Tambah Data</a>
         </div>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
-            <h5 class="card-header">Daftar Kategori Jurusan</h5>
+            <h5 class="card-header">Daftar Jurusan</h5>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Nama</th>
+                            <th>Nama Jurusan</th>
+                            <th>Nama Kategori</th>
                             <th>Deskripsi</th>
-                            <th>Icon</th>
-                            <th>Actions</th>
+                            <th>Profile</th>
+                            <th>Durasi Study</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($categories as $item)
+                        @forelse ($major as $item)
                             <tr>
                                 <td>1</td>
-                                <td>Teknologi</td>
+                                <td>Sistem Informasi</td>
                                 <td>
                                     Jurusan yang mempelajari tentang komputer, pemrograman, dan teknologi informasi.
                                 </td>
@@ -48,7 +49,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">Tidak ada data kategori</td>
+                                <td colspan="5" class="text-center">Tidak ada data jurusan</td>
                             </tr>
                         @endforelse
                     </tbody>
