@@ -7,5 +7,5 @@ Route::prefix('admin-panel')
     ->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/categories', [App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('categories.index');
-        
+        Route::get('/majors', [App\Http\Controllers\Admin\MajorController::class, 'index'])->name('majors.index');
     });

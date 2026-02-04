@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->string('profile')->nullable();
-            $table->string('duration')->nullable();
+            $table->string('study_duration')->nullable();
             $table->timestamps();
         });
     }
