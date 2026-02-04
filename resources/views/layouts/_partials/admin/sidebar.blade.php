@@ -118,6 +118,12 @@
             </a>
         </li>        
         <li class="menu-item">
+            <a href="{{ route('admin.categories.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="Basic">Kategori</div>
+            </a>
+        </li>        
+        <li class="menu-item">
             <a href="{{ route('admin.majors.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-library"></i>
                 <div data-i18n="Basic">Jurusan</div>
