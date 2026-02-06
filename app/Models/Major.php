@@ -20,4 +20,20 @@ class Major extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function competitions()
+    {
+        return $this->hasMany(Competition::class);
+    }
+    public function cariers()
+    {
+        return $this->hasMany(Carier::class);
+    }
+    public function curiculum()
+    {
+        return $this->hasMany(Curiculum::class);
+    }
+    public function relatedIndustru()
+    {
+        return $this->hasMany(Related_Industry::class);
+    }
 }

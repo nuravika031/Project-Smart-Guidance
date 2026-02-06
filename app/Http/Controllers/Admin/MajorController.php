@@ -63,7 +63,8 @@ class MajorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $major = $this->majorService->findById($id);
+        return view('pages.admin.major.showMajor', compact('major'));
     }
 
     /**
