@@ -123,5 +123,11 @@
                 <div data-i18n="Basic">Jurusan</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-open"></i>
+                <div data-i18n="Basic">Detail Jurusan</div>
+            </a>
+        </li>
     </ul>
 </aside>
