@@ -5,10 +5,7 @@
             <h4 class="fw-bold mb-0">
                 <span class="text-muted fw-light"></span> Data Jurusan
             </h4>
-            <a
-                href="{{ route('admin.majors.create') }}"
-                class="btn btn-primary"
-            >Tambah Data</a>
+            <a href="{{ route('admin.majors.create') }}" class="btn btn-primary">Tambah Data</a>
         </div>
 
         {{-- alert success --}}
@@ -64,31 +61,24 @@
                                 </td>
                                 <td>
                                     <div class="dropdown">
-                                        <button
-                                            type="button"
-                                            class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown"
-                                        >
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a
-                                                class="dropdown-item"
-                                                href="{{ route('admin.majors.edit', $item->id) }}"
-                                            ><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <form
-                                                id="delete-form-{{ $item->id }}"
-                                                action="{{ route('admin.majors.destroy', $item->id) }}"
-                                                method="POST"
-                                            >
+                                            <a class="dropdown-item" href="{{ route('admin.majors.show', $item->id) }}">
+                                                <i class="bx bx-detail me-1"></i> Detail Jurusan
+                                            </a>
+
+                                            <a class="dropdown-item" href="{{ route('admin.majors.edit', $item->id) }}"><i
+                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
+                                            <form id="delete-form-{{ $item->id }}"
+                                                action="{{ route('admin.majors.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button
-                                                    type="button"
-                                                class="dropdown-item btn-delete"
-                                                data-id="{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
-                                            ><i class="bx bx-trash me-1"></i> Delete</button>
+                                                <button type="button" class="dropdown-item btn-delete"
+                                                    data-id="{{ $item->id }}" data-name="{{ $item->name }}"><i
+                                                        class="bx bx-trash me-1"></i> Delete</button>
                                             </form>
                                         </div>
                                     </div>
@@ -96,10 +86,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td
-                                    colspan="7"
-                                    class="text-center"
-                                >Tidak ada data jurusan</td>
+                                <td colspan="7" class="text-center">Tidak ada data jurusan</td>
                             </tr>
                         @endforelse
                     </tbody>
