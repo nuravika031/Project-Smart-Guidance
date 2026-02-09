@@ -31,7 +31,7 @@
                             <th>No</th>
                             <th class="text-uppercase text-muted">Nama Kompetensi</th>
                             <th class="text-uppercase text-muted">Jenis Kompetensi</th>
-                            <th class="text-uppercase text-muted text-center">Action</th>
+                            <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
                         </tr>
                     </thead>
 
@@ -40,23 +40,29 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->type }}</td>
+                                <td>{{ $item->type_label }}</td>
 
-                                <td class="text-center">
-                                    <a href="{{ route('admin.competitions.edit', $item->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
+                                <td class="text-center" style="width: 160px;">
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <a href="{{ route('admin.competitions.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            Edit
+                                        </a>
 
-                                    <form action="{{ route('admin.competitions.destroy', $item->id) }}"
-                                        method="POST" class="d-inline"
-                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm">
-                                            Delete
-                                        </button>
-                                    </form>
+                                        <form id="delete-form-competition-{{ $item->id }}"
+                                            action="{{ route('admin.competitions.destroy', $item->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                class="btn btn-danger btn-sm btn-delete"
+                                                data-id="competition-{{ $item->id }}"
+                                                data-name="{{ $item->name }}"
+                                                data-entity="Kompetensi">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
 
                             </tr>
@@ -75,46 +81,55 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Kurikulum</h5>
-                <button class="btn btn-primary btn-sm">Tambah Kurikulum</button>
+                <a href="{{ route('admin.curiculums.create', ['major_id' => $major->id]) }}"
+                    class="btn btn-primary btn-sm">
+                    Tambah Kurikulum
+                </a>
             </div>
 
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead>
                         <tr>
-                            <th>Mata Kuliah Dasar</th>
-                            <th>Mata Kuliah Inti</th>
-                            <th>Mata Kuliah Pilihan</th>
-                            <th>Action</th>
+                            <th>No</th>
+                            <th class="text-uppercase text-muted">Nama Kurikulum</th>
+                            <th class="text-uppercase text-muted">Jenis Kurikulum</th>
+                            <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>
-                                <ul>
-                                    <li>MTK D</li>
-                                    <li>Pendidikan Pancasila</li>
-                                    <li>Or</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>PTSD</li>
-                                    <li>OR</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>Monile Programing</li>
-                                    <li>Vomputer Vision</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
+                        @forelse ($curiculums as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->type_label }}</td>
+                                <td class="text-center" style="width: 160px;">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{{ route('admin.curiculums.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            Edit
+                                        </a>
+
+                                        <form id="delete-form-curiculum-{{ $item->id }}"
+                                            action="{{ route('admin.curiculums.destroy', $item->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                class="btn btn-danger btn-sm btn-delete"
+                                                data-id="curiculum-{{ $item->id }}"
+                                                data-name="{{ $item->name }}"
+                                                data-entity="Kurikulum">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -155,26 +170,53 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Karir</h5>
-                <button class="btn btn-primary btn-sm">Tambah Karir</button>
+                <a href="{{ route('admin.cariers.create', ['major_id' => $major->id]) }}"
+                    class="btn btn-primary btn-sm">
+                    Tambah Karir
+                </a>
             </div>
 
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead>
                         <tr>
-                            <th>Nama Karir</th>
-                            <th>Action</th>
+                            <th>No</th>
+                            <th class="text-uppercase text-muted">Nama Karir</th>
+                            <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Software Engineer</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
+                        @forelse ($cariers as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td class="text-center" style="width: 160px;">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{{ route('admin.cariers.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            Edit
+                                        </a>
+
+                                        <form id="delete-form-carier-{{ $item->id }}"
+                                            action="{{ route('admin.cariers.destroy', $item->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                class="btn btn-danger btn-sm btn-delete"
+                                                data-id="carier-{{ $item->id }}"
+                                                data-name="{{ $item->name }}"
+                                                data-entity="Karir">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -184,5 +226,33 @@
 @endsection
 
 @push('scripts')
-    {{-- sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const name = this.dataset.name;
+                    const entity = this.dataset.entity;
+
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: `${entity} "${name}" akan dihapus secara permanen!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('delete-form-' + id).submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endpush

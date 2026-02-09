@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carier;
+use App\Models\Major;
 use Illuminate\Http\Request;
 
 class CareerController extends Controller
@@ -18,9 +20,13 @@ class CareerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $majorId = $request->query('major_id');
+
+        $major = Major::findOrFail($majorId);
+
+        return view('pages.admin.career.create', compact('major'));
     }
 
     /**
@@ -28,7 +34,27 @@ class CareerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'major_id' => 'required|exists:majors,id',
+            'names' => 'required|string',
+        ]);
+
+        $names = preg_split("/\r\n|\n|\r/", $request->names);
+
+        foreach ($names as $name) {
+            $name = trim($name);
+
+            if ($name !== '') {
+                Carier::create([
+                    'major_id' => $request->major_id,
+                    'name' => $name,
+                ]);
+            }
+        }
+
+        return redirect()
+            ->route('admin.majors.show', $request->major_id)
+            ->with('success', 'Karir berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +70,9 @@ class CareerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $carier = Carier::findOrFail($id);
+
+        return view('pages.admin.career.edit', compact('carier'));
     }
 
     /**
@@ -52,7 +80,18 @@ class CareerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $carier = Carier::findOrFail($id);
+
+        $validated = $request->validate([
+            'major_id' => 'required|exists:majors,id',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $carier->update($validated);
+
+        return redirect()
+            ->route('admin.majors.show', $carier->major_id)
+            ->with('success', 'Karir berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +99,13 @@ class CareerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $carier = Carier::findOrFail($id);
+        $majorId = $carier->major_id;
+
+        $carier->delete();
+
+        return redirect()
+            ->route('admin.majors.show', $majorId)
+            ->with('success', 'Karir berhasil dihapus.');
     }
 }

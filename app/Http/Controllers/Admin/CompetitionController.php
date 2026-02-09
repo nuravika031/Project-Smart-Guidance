@@ -29,8 +29,8 @@ class CompetitionController extends Controller
 
         return view('pages.admin.competition.create', compact('major'));
     }
-
     /**
+     * 
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
