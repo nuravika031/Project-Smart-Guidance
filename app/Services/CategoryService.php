@@ -62,6 +62,9 @@ class CategoryService
     public function delete($id)
     {
         $category = $this->findById($id);
+        // if ($category->majors->count() > 0) {
+        //     throw new \Exception("Kategori tidak dapat dihapus karena memiliki jurusan terkait.");
+        // }
 
         // Delete icon if exists
         $this->deleteIcon($category->icon);
