@@ -36,7 +36,7 @@
       <div class="card h-100">
         <div class="card-body">
           <h5>Total Kategori</h5>
-          <h2>6</h2>
+          <h2>{{ $totalCategories }}</h2>
           <small class="text-muted">Kategori Pendidikan</small>
         </div>
       </div>
@@ -46,7 +46,7 @@
       <div class="card h-100">
         <div class="card-body">
           <h5>Total Jurusan</h5>
-          <h2>24</h2>
+          <h2>{{ $totalMajors }}</h2>
           <small class="text-muted">Seluruh Jurusan</small>
         </div>
       </div>
@@ -56,7 +56,7 @@
       <div class="card h-100">
         <div class="card-body">
           <h5>Rata-rata Jurusan</h5>
-          <h2>4</h2>
+          <h2>{{ $averageMajors }}</h2>
           <small class="text-muted">Per Kategori</small>
         </div>
       </div>
@@ -102,50 +102,28 @@
       <div class="card">
         <div class="card-header">
           <h5>Statistik Jurusan per Kategori</h5>
-          <small class="text-muted">Tampilan sementara</small>
+          <small class="text-muted">Daftar semua kategori dan jumlah jurusan</small>
         </div>
         <div class="card-body">
           <ul class="p-0 m-0">
-
+            @forelse($majorsByCategory as $category)
             <li class="d-flex mb-4">
               <span class="avatar-initial rounded bg-label-primary me-3">
                 <i class="bx bx-desktop"></i>
               </span>
               <div class="d-flex justify-content-between w-100">
                 <div>
-                  <h6 class="mb-0">Teknologi</h6>
-                  <small class="text-muted">IT, RPL, Multimedia</small>
+                  <h6 class="mb-0">{{ $category->name }}</h6>
+                  <small class="text-muted">{{ $category->description }}</small>
                 </div>
-                <small class="fw-semibold">6 Jurusan</small>
+                <small class="fw-semibold">{{ $category->majors_count }} Jurusan</small>
               </div>
             </li>
-
-            <li class="d-flex mb-4">
-              <span class="avatar-initial rounded bg-label-success me-3">
-                <i class="bx bx-heart"></i>
-              </span>
-              <div class="d-flex justify-content-between w-100">
-                <div>
-                  <h6 class="mb-0">Kesehatan</h6>
-                  <small class="text-muted">Keperawatan, Farmasi</small>
-                </div>
-                <small class="fw-semibold">4 Jurusan</small>
-              </div>
+            @empty
+            <li class="text-center text-muted py-4">
+              <p>Tidak ada data kategori</p>
             </li>
-
-            <li class="d-flex">
-              <span class="avatar-initial rounded bg-label-warning me-3">
-                <i class="bx bx-building"></i>
-              </span>
-              <div class="d-flex justify-content-between w-100">
-                <div>
-                  <h6 class="mb-0">Bisnis & Manajemen</h6>
-                  <small class="text-muted">Manajemen, Akuntansi</small>
-                </div>
-                <small class="fw-semibold">5 Jurusan</small>
-              </div>
-            </li>
-
+            @endforelse
           </ul>
         </div>
       </div>

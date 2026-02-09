@@ -14,4 +14,9 @@ class Category extends Model
         'slug',
         'icon',
     ];
+
+    public function majors()
+    {
+        return $this->hasMany(Major::class);
+    }
 }
