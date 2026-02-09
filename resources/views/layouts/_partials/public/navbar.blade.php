@@ -1,4 +1,33 @@
- <header class="bg-white shadow-sm">
+<header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <!-- Logo -->
+        <div>
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('image\logoSmartGuidence.png') }}" alt="Logo" class="h-11 w-auto">
+            </a>
+        </div>
+
+
+        <!-- Menu -->
+        <nav class="flex items-center space-x-8 text-gray-700">
+            <a href="{{ route('home') }}"
+                class="{{ request()->routeIs('home') ? 'text-primary font-medium' : 'hover:text-primary' }}">
+                HOME
+            </a>
+            <a href="{{ route('categories') }}"
+                class="{{ request()->routeIs('categories') ? 'text-primary font-medium' : 'hover:text-primary' }}">
+                KATEGORI
+            </a>
+            <a href="{{ route('majors') }}"
+                class="{{ request()->routeIs('majors') ? 'text-primary font-medium' : 'hover:text-primary' }}">
+                JURUSAN
+            </a>
+        </nav>
+    </div>
+</header>
+
+{{-- <header class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo -->
             <div class="text-xl font-bold text-gray-800">
@@ -12,4 +41,4 @@
                 <a href="{{route('majors')}}" class="flex items-center gap-2 hover:text-primary">JURUSAN</a>
             </nav>
         </div>
-    </header>
+    </header> --}}
