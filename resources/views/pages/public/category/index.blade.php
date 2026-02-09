@@ -29,48 +29,21 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
 
             <!-- Card 1 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-                <div class="mb-6 text-5xl">💻</div>
-                <h3 class="text-lg font-bold text-gray-800 mb-2">
-                    Teknologi & Informasi
-                </h3>
-                <p class="text-gray-600 text-sm">
-                    lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-                </p>
-            </div>
+            @forelse ($categories as $item)
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                    <div class="mb-6 text-5xl flex justify-center">
+                        <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->name }}" width="50">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">
+                        {{ $item->name }}
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        {{ $item->description }}
+                    </p>
+                </div>
+            @empty
 
-            <!-- Card 2 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-                <div class="mb-6 text-5xl">➕</div>
-                <h3 class="text-lg font-bold text-gray-800 mb-2">
-                    Kesehatan
-                </h3>
-                <p class="text-gray-600 text-sm">
-                    lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-                <div class="mb-6 text-5xl">⚖️</div>
-                <h3 class="text-lg font-bold text-gray-800 mb-2">
-                    Hukum & Politik
-                </h3>
-                <p class="text-gray-600 text-sm">
-                    lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-                </p>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-                <div class="mb-6 text-5xl">🎓</div>
-                <h3 class="text-lg font-bold text-gray-800 mb-2">
-                    Pendidikan
-                </h3>
-                <p class="text-gray-600 text-sm">
-                    lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-                </p>
-            </div>
+            @endforelse
 
         </div>
 
