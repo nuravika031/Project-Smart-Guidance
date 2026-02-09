@@ -41,7 +41,7 @@
                 >
                     <div class="avatar avatar-online">
                         <img
-                            src="{{ asset('admin/assets/img/avatars/1.png') }}"
+                            src="{{ asset('admin/assets/img/avatars/adm.png') }}"
                             alt
                             class="w-px-40 h-auto rounded-circle"
                         />
@@ -57,7 +57,7 @@
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
                                         <img
-                                            src="{{ asset('admin/assets/img/avatars/1.png') }}"
+                                            src="{{ asset('admin/assets/img/avatars/adm.png') }}"
                                             alt
                                             class="w-px-40 h-auto rounded-circle"
                                         />
