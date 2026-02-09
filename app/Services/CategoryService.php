@@ -29,7 +29,7 @@ class CategoryService
      */
     public function store(array $data)
     {
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = $this->generateUniqueSlug($data['name']);
 
         if (isset($data['icon']) && $data['icon']) {
             $data['icon'] = $this->uploadIcon($data['icon']);
@@ -44,7 +44,7 @@ class CategoryService
     public function update(array $data, $id)
     {
         $category = $this->findById($id);
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = $this->generateUniqueSlug($data['name'], $category->id);
 
         if (isset($data['icon']) && $data['icon']) {
             // Delete old icon if exists
@@ -80,6 +80,28 @@ class CategoryService
         $filename = time() . '_' . Str::random(10) . '.' . $icon->getClientOriginalExtension();
         $icon->storeAs('categories', $filename, 'public');
         return 'categories/' . $filename;
+    }
+
+    /**
+     * Generate unique slug for categories.
+     */
+    private function generateUniqueSlug(string $name, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($name);
+        $slug = $base;
+        $counter = 2;
+
+        $query = Category::query();
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        while ($query->where('slug', $slug)->exists()) {
+            $slug = $base . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 
     /**
