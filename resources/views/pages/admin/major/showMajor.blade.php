@@ -7,10 +7,7 @@
             <h4 class="fw-bold mb-0">
                 <span class="text-muted fw-light"></span> Edit Detail Jurusan
             </h4>
-            <a
-                href="{{ route('admin.majors.index', $major->id) }}"
-                class="btn btn-secondary"
-            >
+            <a href="{{ route('admin.majors.index', $major->id) }}" class="btn btn-secondary">
                 <i class="bx bx-arrow-back"></i>
                 Kembali
             </a>
@@ -52,14 +49,12 @@
                                         </a>
 
                                         <form id="delete-form-competition-{{ $item->id }}"
-                                            action="{{ route('admin.competitions.destroy', $item->id) }}"
-                                            method="POST" class="d-inline">
+                                            action="{{ route('admin.competitions.destroy', $item->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm btn-delete"
-                                                data-id="competition-{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                data-id="competition-{{ $item->id }}" data-name="{{ $item->name }}"
                                                 data-entity="Kompetensi">
                                                 Delete
                                             </button>
@@ -69,7 +64,9 @@
 
                             </tr>
                         @empty
-
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">Belum ada kompetensi terkait</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -112,14 +109,12 @@
                                         </a>
 
                                         <form id="delete-form-curiculum-{{ $item->id }}"
-                                            action="{{ route('admin.curiculums.destroy', $item->id) }}"
-                                            method="POST" class="d-inline">
+                                            action="{{ route('admin.curiculums.destroy', $item->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm btn-delete"
-                                                data-id="curiculum-{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                data-id="curiculum-{{ $item->id }}" data-name="{{ $item->name }}"
                                                 data-entity="Kurikulum">
                                                 Delete
                                             </button>
@@ -128,7 +123,9 @@
                                 </td>
                             </tr>
                         @empty
-
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">Belum ada kurikulum terkait</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -169,14 +166,12 @@
                                             Edit
                                         </a>
                                         <form id="delete-form-industry-{{ $item->id }}"
-                                            action="{{ route('admin.industries.destroy', $item->id) }}"
-                                            method="POST" class="d-inline">
+                                            action="{{ route('admin.industries.destroy', $item->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm btn-delete"
-                                                data-id="industry-{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                data-id="industry-{{ $item->id }}" data-name="{{ $item->name }}"
                                                 data-entity="Industri Terkait">
                                                 Delete
                                             </button>
@@ -200,8 +195,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Karir</h5>
-                <a href="{{ route('admin.cariers.create', ['major_id' => $major->id]) }}"
-                    class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.cariers.create', ['major_id' => $major->id]) }}" class="btn btn-primary btn-sm">
                     Tambah Karir
                 </a>
             </div>
@@ -229,14 +223,12 @@
                                         </a>
 
                                         <form id="delete-form-carier-{{ $item->id }}"
-                                            action="{{ route('admin.cariers.destroy', $item->id) }}"
-                                            method="POST" class="d-inline">
+                                            action="{{ route('admin.cariers.destroy', $item->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm btn-delete"
-                                                data-id="carier-{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                data-id="carier-{{ $item->id }}" data-name="{{ $item->name }}"
                                                 data-entity="Karir">
                                                 Delete
                                             </button>
@@ -245,7 +237,9 @@
                                 </td>
                             </tr>
                         @empty
-
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">Belum ada karir terkait</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
