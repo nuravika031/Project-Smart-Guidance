@@ -71,21 +71,22 @@ class MajorController extends Controller
         $major = Major::with('competitions', 'relatedIndustru')->findOrFail($id);
 
         $competitions = Competition::where('major_id', $major->id)->get();
- Rifqah
-        $relatedIndustries = Related_Industry::where('major_id', $major->id)->get();
-
-        return view('pages.admin.major.showMajor', compact('major', 'competitions', 'relatedIndustries'));
-
         $curiculums = Curiculum::where('major_id', $major->id)->get();
         $cariers = Carier::where('major_id', $major->id)->get();
+        $relatedIndustries = Related_Industry::where('major_id', $major->id)->get();
+
+        return view('pages.admin.major.showMajor', compact(
+            'major',
+            'competitions',
+            'curiculums',
+            'cariers',
+            'relatedIndustries'
+        ));
         // dd($competitions);
         // $competitions = [
         //     'hardskill' => $major->competitions->where('type', 'hardskill'),
         //     'softskill' => $major->competitions->where('type', 'softskill'),
         // ];
-
-        return view('pages.admin.major.showMajor', compact('major', 'competitions', 'curiculums', 'cariers'));
- main
 
     }
 

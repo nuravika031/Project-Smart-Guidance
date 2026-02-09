@@ -33,11 +33,7 @@
                             <th>No</th>
                             <th class="text-uppercase text-muted">Nama Kompetensi</th>
                             <th class="text-uppercase text-muted">Jenis Kompetensi</th>
- Rifqah
-                            <th class="text-uppercase text-muted" style="text-align: right; padding-right: 50px;">Action</th>
-
                             <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
- main
                         </tr>
                     </thead>
 
@@ -46,28 +42,10 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
- Rifqah
-                                <td>{{ $item->type }}</td>
-
-                                <td class="text-end">
-                                    <a href="{{ route('admin.competitions.edit', $item->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.competitions.destroy', $item->id) }}"
-                                        method="POST" class="d-inline"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus kompetensi ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm">
-                                            Delete
-                                        </button>
-                                    </form>
-
                                 <td>{{ $item->type_label }}</td>
 
                                 <td class="text-center" style="width: 160px;">
-                                    <div class="d-flex justify-content-center gap-1">
+                                    <div class="d-inline-flex gap-1">
                                         <a href="{{ route('admin.competitions.edit', $item->id) }}"
                                             class="btn btn-warning btn-sm">
                                             Edit
@@ -87,7 +65,6 @@
                                             </button>
                                         </form>
                                     </div>
- main
                                 </td>
 
                             </tr>
@@ -175,7 +152,7 @@
                         <tr>
                             <th>No</th>
                             <th class="text-uppercase text-muted">Industri Terkait</th>
-                            <th class="text-uppercase text-muted" style="text-align: right; padding-right: 50px;">Action</th>
+                            <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
                         </tr>
                     </thead>
 
@@ -185,20 +162,26 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
 
-                                <td class="text-end">
-                                    <a href="{{ route('admin.industries.edit', $item->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.industries.destroy', $item->id) }}"
-                                        method="POST" class="d-inline"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus industri ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm">
-                                            Delete
-                                        </button>
-                                    </form>
+                                <td class="text-center" style="width: 160px;">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{{ route('admin.industries.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            Edit
+                                        </a>
+                                        <form id="delete-form-industry-{{ $item->id }}"
+                                            action="{{ route('admin.industries.destroy', $item->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                class="btn btn-danger btn-sm btn-delete"
+                                                data-id="industry-{{ $item->id }}"
+                                                data-name="{{ $item->name }}"
+                                                data-entity="Industri Terkait">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
 
                             </tr>
@@ -271,9 +254,6 @@
 
     </div>
 @endsection
-Rifqah
-
-
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -305,4 +285,3 @@ Rifqah
         });
     </script>
 @endpush
- main
