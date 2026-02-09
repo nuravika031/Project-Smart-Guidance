@@ -98,7 +98,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item @if(request()->routeIs('admin.dashboard')) active @endif">
             <a href="{{ route('admin.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -111,13 +111,13 @@
         <!-- Components -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Admin</span></li>
         <!-- Cards -->
-        <li class="menu-item">
+        <li class="menu-item @if(request()->routeIs('admin.categories.*')) active @endif">
             <a href="{{ route('admin.categories.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if(request()->routeIs('admin.majors.*')) active @endif">
             <a href="{{ route('admin.majors.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-library"></i>
                 <div data-i18n="Basic">Jurusan</div>

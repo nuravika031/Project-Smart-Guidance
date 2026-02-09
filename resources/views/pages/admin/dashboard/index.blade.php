@@ -51,49 +51,6 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5>Rata-rata Jurusan</h5>
-          <h2>{{ $averageMajors }}</h2>
-          <small class="text-muted">Per Kategori</small>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DIAGRAM STATISTIK -->
-  <div class="row">
-
-    <!-- Diagram Kategori -->
-    <div class="col-12 col-lg-8 mb-4">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="mb-0">Diagram Statistik Kategori</h5>
-          <small class="text-muted">Visualisasi jumlah jurusan per kategori</small>
-        </div>
-        <div class="card-body">
-          <!-- INI YANG PENTING -->
-          <div id="totalRevenueChart"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Diagram Jurusan -->
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="mb-0">Diagram Jurusan</h5>
-          <small class="text-muted">Distribusi jurusan</small>
-        </div>
-        <div class="card-body">
-          <!-- INI JUGA PENTING -->
-          <div id="orderStatisticsChart"></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <!-- List Jurusan per Kategori -->
