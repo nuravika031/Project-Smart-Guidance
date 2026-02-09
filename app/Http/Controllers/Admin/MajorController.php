@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MajorRequest;
 use App\Models\Category;
+use App\Models\Competition;
+use App\Models\Major;
 use App\Services\ActivityService;
 use App\Services\MajorService;
 use Illuminate\Support\Facades\DB;
@@ -63,8 +65,17 @@ class MajorController extends Controller
      */
     public function show(string $id)
     {
-        $major = $this->majorService->findById($id);
-        return view('pages.admin.major.showMajor', compact('major'));
+        $major = Major::with('competitions')->findOrFail($id);
+
+        $competitions = Competition::where('major_id', $major->id)->get();
+        // dd($competitions);
+        // $competitions = [
+        //     'hardskill' => $major->competitions->where('type', 'hardskill'),
+        //     'softskill' => $major->competitions->where('type', 'softskill'),
+        // ];
+
+        return view('pages.admin.major.showMajor', compact('major', 'competitions'));
+
     }
 
     /**
