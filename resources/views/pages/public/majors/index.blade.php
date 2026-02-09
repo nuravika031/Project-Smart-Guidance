@@ -34,15 +34,18 @@
         <div class="space-y-6">
 
             <!-- Item 1 -->
-            <div class="bg-white rounded-xl shadow-md px-8 py-6 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-gray-800">
-                    TEKNIK INFORMATIKA
-                </h3>
-                <a href="{{ route('detail') }}"
-                    class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                    Lihat Detail >>
-                </a>
-            </div>
+            @foreach ($majors as $major)
+                <div class="bg-white rounded-xl shadow-md px-8 py-6 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-800">
+                        {{ $major->name }}
+                    </h3>
+                    <a href="{{ route('detail', $major->id) }}"
+                        class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+                        Lihat Detail >>
+                    </a>
+                </div>
+            @endforeach
+
 
         </div>
 
