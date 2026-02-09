@@ -7,7 +7,10 @@
             <h4 class="fw-bold mb-0">
                 <span class="text-muted fw-light"></span> Edit Detail Jurusan
             </h4>
-            <a href="{{ route('admin.majors.index', $major->id) }}" class="btn btn-secondary">
+            <a
+                href="{{ route('admin.majors.index', $major->id) }}"
+                class="btn btn-secondary"
+            >
                 <i class="bx bx-arrow-back"></i>
                 Kembali
             </a>
@@ -21,7 +24,6 @@
                     class="btn btn-primary btn-sm">
                     Tambah Kompetensi
                 </a>
-
             </div>
 
             <div class="table-responsive">
@@ -31,7 +33,11 @@
                             <th>No</th>
                             <th class="text-uppercase text-muted">Nama Kompetensi</th>
                             <th class="text-uppercase text-muted">Jenis Kompetensi</th>
+ Rifqah
+                            <th class="text-uppercase text-muted" style="text-align: right; padding-right: 50px;">Action</th>
+
                             <th class="text-uppercase text-muted text-center" style="width: 160px;">Action</th>
+ main
                         </tr>
                     </thead>
 
@@ -40,6 +46,24 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
+ Rifqah
+                                <td>{{ $item->type }}</td>
+
+                                <td class="text-end">
+                                    <a href="{{ route('admin.competitions.edit', $item->id) }}"
+                                        class="btn btn-warning btn-sm">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('admin.competitions.destroy', $item->id) }}"
+                                        method="POST" class="d-inline"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus kompetensi ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">
+                                            Delete
+                                        </button>
+                                    </form>
+
                                 <td>{{ $item->type_label }}</td>
 
                                 <td class="text-center" style="width: 160px;">
@@ -63,6 +87,7 @@
                                             </button>
                                         </form>
                                     </div>
+ main
                                 </td>
 
                             </tr>
@@ -73,8 +98,6 @@
                 </table>
             </div>
         </div>
-
-        
 
 
         {{-- ================= CURRICULUM ================= --}}
@@ -140,26 +163,50 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Industri Terkait</h5>
-                <button class="btn btn-primary btn-sm">Tambah Industri</button>
+                <a href="{{ route('admin.industries.create', ['major_id' => $major->id]) }}"
+                    class="btn btn-primary btn-sm">
+                    Tambah Industri
+                </a>
             </div>
 
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead>
                         <tr>
-                            <th>Industri Terkait</th>
-                            <th>Action</th>
+                            <th>No</th>
+                            <th class="text-uppercase text-muted">Industri Terkait</th>
+                            <th class="text-uppercase text-muted" style="text-align: right; padding-right: 50px;">Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Software House</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
+                        @forelse ($relatedIndustries as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+
+                                <td class="text-end">
+                                    <a href="{{ route('admin.industries.edit', $item->id) }}"
+                                        class="btn btn-warning btn-sm">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('admin.industries.destroy', $item->id) }}"
+                                        method="POST" class="d-inline"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus industri ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">Belum ada industri terkait</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -224,6 +271,8 @@
 
     </div>
 @endsection
+Rifqah
+
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -256,3 +305,4 @@
         });
     </script>
 @endpush
+ main

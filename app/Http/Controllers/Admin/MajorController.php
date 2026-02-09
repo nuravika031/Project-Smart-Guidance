@@ -9,6 +9,7 @@ use App\Models\Competition;
 use App\Models\Carier;
 use App\Models\Curiculum;
 use App\Models\Major;
+use App\Models\Related_Industry;
 use App\Services\ActivityService;
 use App\Services\MajorService;
 use Illuminate\Support\Facades\DB;
@@ -67,9 +68,14 @@ class MajorController extends Controller
      */
     public function show(string $id)
     {
-        $major = Major::with('competitions')->findOrFail($id);
+        $major = Major::with('competitions', 'relatedIndustru')->findOrFail($id);
 
         $competitions = Competition::where('major_id', $major->id)->get();
+ Rifqah
+        $relatedIndustries = Related_Industry::where('major_id', $major->id)->get();
+
+        return view('pages.admin.major.showMajor', compact('major', 'competitions', 'relatedIndustries'));
+
         $curiculums = Curiculum::where('major_id', $major->id)->get();
         $cariers = Carier::where('major_id', $major->id)->get();
         // dd($competitions);
@@ -79,6 +85,7 @@ class MajorController extends Controller
         // ];
 
         return view('pages.admin.major.showMajor', compact('major', 'competitions', 'curiculums', 'cariers'));
+ main
 
     }
 
