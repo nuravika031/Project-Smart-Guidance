@@ -22,7 +22,6 @@
             </div>
         @endif
 
-        <!-- Basic Bootstrap Table -->
         <div class="card">
             <h5 class="card-header">Daftar Jurusan </h5>
             <div class="table-responsive text-nowrap">
@@ -35,7 +34,7 @@
                             <th>Deskripsi</th>
                             <th>Profile</th>
                             <th>Durasi Studi</th>
-                            <th>Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -60,27 +59,32 @@
                                     {{ $item->study_duration ?? '-' }}
                                 </td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('admin.majors.show', $item->id) }}">
-                                                <i class="bx bx-detail me-1"></i> Detail Jurusan
-                                            </a>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        {{-- Tombol Detail --}}
+                                        <a href="{{ route('admin.majors.show', $item->id) }}" 
+                                           class="btn btn-info btn-sm text-white">
+                                            <i class="bx bx-detail me-1"></i> Detail
+                                        </a>
 
-                                            <a class="dropdown-item" href="{{ route('admin.majors.edit', $item->id) }}"><i
-                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <form id="delete-form-{{ $item->id }}"
-                                                action="{{ route('admin.majors.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="dropdown-item btn-delete"
-                                                    data-id="{{ $item->id }}" data-name="{{ $item->name }}"><i
-                                                        class="bx bx-trash me-1"></i> Delete</button>
-                                            </form>
-                                        </div>
+                                        {{-- Tombol Edit --}}
+                                        <a href="{{ route('admin.majors.edit', $item->id) }}" 
+                                           class="btn btn-warning btn-sm">
+                                            <i class="bx bx-edit-alt me-1"></i> Edit
+                                        </a>
+
+                                        {{-- Tombol Delete --}}
+                                        <form id="delete-form-{{ $item->id }}"
+                                              action="{{ route('admin.majors.destroy', $item->id) }}" 
+                                              method="POST" 
+                                              class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                    data-id="{{ $item->id }}" 
+                                                    data-name="{{ $item->name }}">
+                                                <i class="bx bx-trash me-1"></i> Delete
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -93,18 +97,12 @@
                 </table>
             </div>
         </div>
-        <!--/ Basic Bootstrap Table -->
-
-        <!-- Pagination -->
         <div class="d-flex justify-content-end align-items-center mt-3">
             <div>
                 {{ $major->links() }}
             </div>
         </div>
-        <!--/ Pagination -->
-
-        <!--/ Responsive Table -->
-    </div>
+        </div>
 @endsection
 
 @push('scripts')

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MajorRequest;
 use App\Models\Category;
 use App\Models\Competition;
+use App\Models\Carier;
+use App\Models\Curiculum;
 use App\Models\Major;
 use App\Models\Related_Industry;
 use App\Services\ActivityService;
@@ -69,9 +71,21 @@ class MajorController extends Controller
         $major = Major::with('competitions', 'relatedIndustru')->findOrFail($id);
 
         $competitions = Competition::where('major_id', $major->id)->get();
+ Rifqah
         $relatedIndustries = Related_Industry::where('major_id', $major->id)->get();
 
         return view('pages.admin.major.showMajor', compact('major', 'competitions', 'relatedIndustries'));
+
+        $curiculums = Curiculum::where('major_id', $major->id)->get();
+        $cariers = Carier::where('major_id', $major->id)->get();
+        // dd($competitions);
+        // $competitions = [
+        //     'hardskill' => $major->competitions->where('type', 'hardskill'),
+        //     'softskill' => $major->competitions->where('type', 'softskill'),
+        // ];
+
+        return view('pages.admin.major.showMajor', compact('major', 'competitions', 'curiculums', 'cariers'));
+ main
 
     }
 
