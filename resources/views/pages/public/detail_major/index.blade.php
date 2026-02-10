@@ -94,9 +94,12 @@
     <!-- ===== Durasi Studi ===== -->
     <section class="bg-white rounded-xl shadow p-8">
         <h2 class="text-xl font-semibold mb-4">Durasi Studi</h2>
-        <p class="text-gray-700">
-            {{ $major->study_duration ?: 'Durasi studi belum tersedia.' }}
-        </p>
+        <div class="bg-blue-100 rounded-xl shadow p-6">
+            <p class="text-gray-700">
+                {{ $major->study_duration ?: 'Durasi studi belum tersedia.' }}
+            </p>
+        </div>
+
     </section>
 
     <!-- ===== Bidang Industri ===== -->
