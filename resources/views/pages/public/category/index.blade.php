@@ -41,7 +41,7 @@
                             <h3 class="text-lg font-bold text-gray-800 mb-2">
                                 {{ $item->name }}
                             </h3>
-                            <p class="text-gray-600 text-sm">
+                            <p class="text-gray-600 text-sm category-desc">
                                 {{ $item->description }}
                             </p>
                         </a>
@@ -73,6 +73,13 @@
             display: none; /* Chrome, Safari, Opera */
         }
         .bg-primary { background-color: #3b82f6; } /* Pastikan warna primary terdefinisi */
+        .category-desc {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: break-word;
+        }
     </style>
 @endpush
 
