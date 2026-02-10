@@ -44,7 +44,7 @@
                                 <td>
                                     {{ $item->name }}
                                 </td>
-                                <td>
+                                <td class="text-wrap" style="max-width: 320px; white-space: normal; word-break: break-word;">
                                     {{ $item->description }}
                                 </td>
                                 <td>

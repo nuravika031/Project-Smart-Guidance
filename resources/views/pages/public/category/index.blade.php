@@ -2,7 +2,6 @@
 @section('content')
     <div class="max-w-7xl mx-auto px-6">
 
-        <!-- Title -->
         <div class="text-center mb-12">
             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3">
                 CARI KATEGORI
@@ -12,13 +11,12 @@
             </p>
         </div>
 
-        <!-- Search Bar -->
         <div class="max-w-4xl mx-auto mb-16">
-            <div class="flex items-center bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="flex items-center bg-white rounded-xl shadow-md overflow-hidden border border-transparent focus-within:border-primary transition">
                 <div class="px-5 text-gray-400 text-xl">
                     &#128269;
                 </div>
-                <input id="categorySearch" type="text" placeholder="Cari Kategori"
+                <input id="categorySearch" type="text" placeholder="Cari Kategori (Contoh: Teknologi, Seni...)"
                     class="flex-1 py-4 px-2 outline-none text-gray-700">
                 <button id="categorySearchBtn"
                     class="bg-primary text-white px-8 py-3 m-2 rounded-lg font-medium hover:bg-blue-600 transition">
@@ -27,36 +25,41 @@
             </div>
         </div>
 
-        <!-- Cards (3 visible, swipe/scroll to slide) -->
         <div class="relative mb-6">
             <div id="categoryViewport"
                 class="mx-auto w-full md:max-w-[700px] lg:max-w-[1040px] overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
-                <div id="categoryTrack" class="flex gap-10 w-full">
+                
+                <div id="categoryTrack" class="flex gap-10 w-full transition-all duration-300">
                     @forelse ($categories as $item)
-                        <div class="category-card bg-white rounded-2xl shadow-lg p-8 text-center w-full sm:w-[320px] flex-shrink-0 snap-start"
+                        <a href="{{ route('majors', ['category' => $item->slug]) }}"
+                            class="category-card bg-white rounded-2xl shadow-lg p-8 text-center w-full sm:w-[320px] flex-shrink-0 snap-start border border-gray-50"
                             data-name="{{ strtolower($item->name) }}"
                             data-desc="{{ strtolower($item->description ?? '') }}">
                             <div class="mb-6 text-5xl flex justify-center">
-                                <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->name }}" width="50">
+                                <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->name }}" class="w-16 h-16 object-contain">
                             </div>
                             <h3 class="text-lg font-bold text-gray-800 mb-2">
                                 {{ $item->name }}
                             </h3>
-                            <p class="text-gray-600 text-sm">
+                            <p class="text-gray-600 text-sm category-desc">
                                 {{ $item->description }}
                             </p>
-                        </div>
+                        </a>
                     @empty
-                        <div class="text-center text-gray-500 w-full">
+                        <div class="text-center text-gray-500 w-full py-10">
                             Belum ada data kategori.
                         </div>
                     @endforelse
+
+                    <div id="noResults" class="hidden text-center text-gray-500 w-full py-10">
+                        <div class="text-5xl mb-4">🔍</div>
+                        Kategori yang kamu cari tidak ditemukan.
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Pagination Dots -->
-        <div id="categoryDots" class="flex justify-center gap-4"></div>
+        <div id="categoryDots" class="flex justify-center gap-4 mt-4"></div>
 
     </div>
 @endsection
@@ -64,10 +67,18 @@
 @push('styles')
     <style>
         #categoryViewport {
-            scrollbar-width: none;
+            scrollbar-width: none; /* Firefox */
         }
         #categoryViewport::-webkit-scrollbar {
-            display: none;
+            display: none; /* Chrome, Safari, Opera */
+        }
+        .bg-primary { background-color: #3b82f6; } /* Pastikan warna primary terdefinisi */
+        .category-desc {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: break-word;
         }
     </style>
 @endpush
@@ -77,110 +88,126 @@
         document.addEventListener('DOMContentLoaded', function() {
             const input = document.getElementById('categorySearch');
             const button = document.getElementById('categorySearchBtn');
-            const cards = Array.from(document.querySelectorAll('.category-card'));
             const track = document.getElementById('categoryTrack');
             const viewport = document.getElementById('categoryViewport');
             const dotsContainer = document.getElementById('categoryDots');
+            const noResults = document.getElementById('noResults');
+            
+            // Mengambil semua kartu asli
+            const allCards = Array.from(document.querySelectorAll('.category-card'));
             const perPage = 3;
             let currentPage = 0;
 
-            const applyHoverMotion = () => {
-                cards.forEach(card => {
-                    card.classList.add('transition-transform', 'duration-300');
-                    card.addEventListener('mouseenter', () => {
-                        card.classList.add('-translate-y-1');
-                        card.classList.add('shadow-xl');
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        card.classList.remove('-translate-y-1');
-                        card.classList.remove('shadow-xl');
-                    });
-                });
-            };
-
+            // --- 1. FUNGSI FILTER ---
             const filterCards = () => {
-                const q = (input.value || '').trim().toLowerCase();
+                const query = input.value.toLowerCase().trim();
+                let matchCount = 0;
 
-                cards.forEach(card => {
+                allCards.forEach(card => {
                     const name = card.dataset.name || '';
                     const desc = card.dataset.desc || '';
-                    const match = q === '' || name.includes(q) || desc.includes(q);
-                    card.classList.toggle('hidden', !match);
+                    
+                    if (query === '' || name.includes(query) || desc.includes(query)) {
+                        card.classList.remove('hidden');
+                        card.style.display = 'block';
+                        matchCount++;
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none';
+                    }
                 });
 
+                // Tampilkan pesan jika tidak ada hasil
+                noResults.classList.toggle('hidden', matchCount > 0);
+                
+                // Reset navigasi
                 currentPage = 0;
+                refreshUI();
+            };
+
+            // --- 2. FUNGSI LAYOUT & NAVIGASI ---
+            const getVisibleCards = () => allCards.filter(c => !c.classList.contains('hidden'));
+
+            const refreshUI = () => {
+                const visibleCards = getVisibleCards();
+                
+                // Atur agar kartu ke tengah jika jumlahnya sedikit
+                if (visibleCards.length <= perPage) {
+                    track.style.justifyContent = 'center';
+                } else {
+                    track.style.justifyContent = 'flex-start';
+                }
+
                 renderDots();
                 scrollToPage(0);
             };
 
-            input.addEventListener('input', filterCards);
-            button.addEventListener('click', filterCards);
-
-            const getVisibleCards = () => cards.filter(c => !c.classList.contains('hidden'));
-
-            const getPageCount = () => {
-                const visibleCount = getVisibleCards().length;
-                return Math.max(1, Math.ceil(visibleCount / perPage));
-            };
-
-            const applyBalance = () => {
-                const visibleCount = getVisibleCards().length;
-                const shouldCenter = visibleCount <= perPage;
-                track.classList.toggle('justify-center', shouldCenter);
-            };
-
             const getCardStep = () => {
-                const first = getVisibleCards()[0];
-                if (!first) return 0;
-                const cardWidth = first.getBoundingClientRect().width;
-                const gap = 40;
-                return cardWidth + gap;
-            };
-
-            const scrollToPage = (page) => {
-                const step = getCardStep();
-                const offset = step * perPage * page;
-                viewport.scrollTo({ left: offset, behavior: 'smooth' });
+                const visible = getVisibleCards();
+                if (visible.length === 0) return 0;
+                return visible[0].offsetWidth + 40; // width + gap (gap-10 = 40px)
             };
 
             const renderDots = () => {
-                const pageCount = getPageCount();
+                const visibleCount = getVisibleCards().length;
+                const pageCount = Math.ceil(visibleCount / perPage);
                 dotsContainer.innerHTML = '';
 
-                for (let i = 0; i < pageCount; i += 1) {
+                if (pageCount <= 1) return;
+
+                for (let i = 0; i < pageCount; i++) {
                     const dot = document.createElement('button');
-                    dot.type = 'button';
-                    dot.className = 'w-4 h-4 rounded-full ' + (i === currentPage ? 'bg-primary' : 'bg-gray-300');
+                    dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === currentPage ? 'bg-primary w-8' : 'bg-gray-300'}`;
                     dot.addEventListener('click', () => {
                         currentPage = i;
-                        renderDots();
                         scrollToPage(i);
+                        updateActiveDot();
                     });
                     dotsContainer.appendChild(dot);
                 }
             };
 
-            const syncDotsOnScroll = () => {
-                const step = getCardStep();
-                if (step === 0) return;
-                const page = Math.round(viewport.scrollLeft / (step * perPage));
-                if (page !== currentPage) {
-                    currentPage = page;
-                    renderDots();
-                }
+            const updateActiveDot = () => {
+                const dots = dotsContainer.querySelectorAll('button');
+                dots.forEach((dot, index) => {
+                    if (index === currentPage) {
+                        dot.classList.add('bg-primary', 'w-8');
+                        dot.classList.remove('bg-gray-300');
+                    } else {
+                        dot.classList.remove('bg-primary', 'w-8');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
             };
 
-            applyHoverMotion();
-            applyBalance();
-            renderDots();
+            const scrollToPage = (page) => {
+                const step = getCardStep();
+                viewport.scrollTo({ left: step * perPage * page, behavior: 'smooth' });
+            };
+
+            // --- 3. EVENT LISTENERS ---
+            input.addEventListener('input', filterCards);
+            button.addEventListener('click', filterCards);
+
+            // Sync dots saat user scroll manual (swipe)
             viewport.addEventListener('scroll', () => {
-                window.requestAnimationFrame(syncDotsOnScroll);
+                const step = getCardStep();
+                if (step === 0) return;
+                const newPage = Math.round(viewport.scrollLeft / (step * perPage));
+                if (newPage !== currentPage) {
+                    currentPage = newPage;
+                    updateActiveDot();
+                }
             });
-            window.addEventListener('resize', () => {
-                applyBalance();
-                renderDots();
-                scrollToPage(currentPage);
+
+            // Efek Hover (Opsional, lebih rapi jika di JS)
+            allCards.forEach(card => {
+                card.addEventListener('mouseenter', () => card.classList.add('-translate-y-2', 'shadow-2xl'));
+                card.addEventListener('mouseleave', () => card.classList.remove('-translate-y-2', 'shadow-2xl'));
             });
+
+            // Inisialisasi awal
+            refreshUI();
         });
     </script>
 @endpush

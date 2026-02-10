@@ -31,6 +31,7 @@
                 <form
                     action="{{ route('admin.majors.store') }}"
                     method="POST"
+                    autocomplete="off"
                 >
                     @csrf
                     <div class="mb-3">
@@ -65,6 +66,7 @@
                             id="name"
                             name="name"
                             placeholder="Nama Jurusan"
+                            autocomplete="off"
                             required
                         >
                     </div>
