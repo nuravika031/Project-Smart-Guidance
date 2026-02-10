@@ -8,8 +8,8 @@
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-gray-600 max-w-2xl mx-auto mb-16">
-            Temukan program Smart Guidance yang sesuai dengan minat dan potensi anda dengan mudah
+        <p class="text-gray-600 max-w-xl mx-auto mb-20">
+            Mari temukan program studi yang paling sesuai dengan ambisi dan potensimu ! Sudah siap menentukan arah?
         </p>
 
         <!-- Cards -->
@@ -24,7 +24,7 @@
                     Pencarian Cepat
                 </h3>
                 <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
+                    Akses data jurusan yang kamu butuhkan secara instan tanpa ribet.
                 </p>
             </div>
 
@@ -37,7 +37,7 @@
                     Informasi Lengkap
                 </h3>
                 <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
+                    Bedah tuntas setiap program studi agar langkahmu jadi lebih pasti
                 </p>
             </div>
 
@@ -50,7 +50,7 @@
                     Berdasarkan Minat
                 </h3>
                 <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
+                    Temukan kecocokanmu! Pilih kategori Saintek, Soshum, atau Seni yang paling sesuai dengan dirimu
                 </p>
             </div>
 
