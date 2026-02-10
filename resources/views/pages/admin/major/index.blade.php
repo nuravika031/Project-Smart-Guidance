@@ -24,15 +24,15 @@
 
         <div class="card">
             <h5 class="card-header">Daftar Jurusan </h5>
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>NO</th>
                             <th>Nama Kategori</th>
                             <th>Nama Jurusan</th>
-                            <th>Deskripsi</th>
-                            <th>Profile</th>
+                            <th style="width: 40%;">Deskripsi</th>
+                            <th style="width: 50%;">Profile</th>
                             <th>Durasi Studi</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -49,10 +49,12 @@
                                 <td>
                                     {{ $item->name }}
                                 </td>
-                                <td>
+                                <td class="text-wrap align-top"
+                                    style="max-width: 760px; white-space: normal; word-break: break-word;">
                                     {{ $item->description ?? '-' }}
                                 </td>
-                                <td>
+                                <td class="text-wrap align-top"
+                                    style="max-width: 760px; white-space: normal; word-break: break-word;">
                                     {{ $item->profile ?? '-' }}
                                 </td>
                                 <td>

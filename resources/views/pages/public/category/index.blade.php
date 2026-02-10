@@ -31,7 +31,8 @@
                 
                 <div id="categoryTrack" class="flex gap-10 w-full transition-all duration-300">
                     @forelse ($categories as $item)
-                        <div class="category-card bg-white rounded-2xl shadow-lg p-8 text-center w-full sm:w-[320px] flex-shrink-0 snap-start border border-gray-50"
+                        <a href="{{ route('majors', ['category' => $item->slug]) }}"
+                            class="category-card bg-white rounded-2xl shadow-lg p-8 text-center w-full sm:w-[320px] flex-shrink-0 snap-start border border-gray-50"
                             data-name="{{ strtolower($item->name) }}"
                             data-desc="{{ strtolower($item->description ?? '') }}">
                             <div class="mb-6 text-5xl flex justify-center">
@@ -43,7 +44,7 @@
                             <p class="text-gray-600 text-sm">
                                 {{ $item->description }}
                             </p>
-                        </div>
+                        </a>
                     @empty
                         <div class="text-center text-gray-500 w-full py-10">
                             Belum ada data kategori.

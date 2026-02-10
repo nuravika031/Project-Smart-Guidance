@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Major;
 use Illuminate\Http\Request;
+use App\Models\Major;
 
 class DetailController extends Controller
 {
-    public function show(string $id)
+    public function show(Major $major)
     {
-        $major = Major::with(['category', 'competitions', 'curiculum', 'relatedIndustru', 'cariers'])
-            ->findOrFail($id);
+        $major->load(['category', 'competitions', 'curiculum', 'relatedIndustru', 'cariers']);
 
         $competitions = [
             'hardskill' => $major->competitions->where('type', 'hardskill'),

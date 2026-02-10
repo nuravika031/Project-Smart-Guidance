@@ -14,7 +14,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/majors', [MajorsController::class, 'index'])->name('majors');
 
-Route::get('/detail/{id}', [DetailController::class, 'show'])->name('detail');
+Route::get('/detail/{major:slug}', [DetailController::class, 'show'])->name('detail');
 
 
 

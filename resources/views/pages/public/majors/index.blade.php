@@ -7,7 +7,11 @@
                 CARI JURUSAN
             </h1>
             <p class="text-gray-600">
-                Cari dan pelajari jurusan secara detail untuk menentukan pilihan pendidikan dan karier masa depan.
+                @if (!empty($category))
+                    Menampilkan jurusan untuk kategori <span class="font-semibold">{{ $category->name }}</span>.
+                @else
+                    Cari dan pelajari jurusan secara detail untuk menentukan pilihan pendidikan dan karier masa depan.
+                @endif
             </p>
         </div>
 
@@ -35,7 +39,7 @@
                     <h3 class="major-name text-lg font-bold text-gray-800">
                         {{ $major->name }}
                     </h3>
-                    <a href="{{ route('detail', $major->id) }}"
+                    <a href="{{ route('detail', $major->slug) }}"
                         class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
                         Lihat Detail >>
                     </a>
