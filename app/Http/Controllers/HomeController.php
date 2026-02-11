@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('pages.public.home.index');
+        $countCategories = \App\Models\Category::count();
+        $countMajors = \App\Models\Major::count();
+        return view('pages.public.home.index', compact('countCategories', 'countMajors'));
     }
 }
