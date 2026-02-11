@@ -1,25 +1,25 @@
 @extends('layouts.public')
 @section('content')
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div class="text-center mb-12">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3">
+        <div class="text-center mb-8 sm:mb-12">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 mb-2 sm:mb-3">
                 CARI KATEGORI
             </h1>
-            <p class="text-gray-600">
+            <p class="text-sm sm:text-base text-gray-600">
                 Pilih kategori pendidikan untuk melihat kelompok jurusan sesuai bidang minat dan keahlian.
             </p>
         </div>
 
-        <div class="max-w-4xl mx-auto mb-16">
-            <div class="flex items-center bg-white rounded-xl shadow-md overflow-hidden border border-transparent focus-within:border-primary transition">
-                <div class="px-5 text-gray-400 text-xl">
+        <div class="max-w-4xl mx-auto mb-8 sm:mb-16">
+            <div class="flex items-center flex-nowrap gap-1 sm:gap-2 bg-white rounded-xl shadow-md overflow-hidden border border-transparent focus-within:border-primary transition">
+                <div class="px-2 sm:px-4 text-gray-400 text-base sm:text-lg flex-shrink-0">
                     &#128269;
                 </div>
-                <input id="categorySearch" type="text" placeholder="Cari Kategori (Contoh: Teknologi, Seni...)"
-                    class="flex-1 py-4 px-2 outline-none text-gray-700">
+                <input id="categorySearch" type="text" placeholder="Cari kategori..."
+                    class="flex-1 py-2 sm:py-3 px-1 sm:px-2 outline-none text-xs sm:text-sm text-gray-700 min-w-0">
                 <button id="categorySearchBtn"
-                    class="bg-primary text-white px-8 py-3 m-2 rounded-lg font-medium hover:bg-blue-600 transition">
+                    class="bg-primary text-white px-2 sm:px-4 py-2 sm:py-3 m-1 sm:m-2 rounded-lg font-medium hover:bg-blue-600 transition text-xs sm:text-sm flex-shrink-0 whitespace-nowrap">
                     Cari
                 </button>
             </div>
@@ -27,21 +27,21 @@
 
         <div class="relative mb-6">
             <div id="categoryViewport"
-                class="mx-auto w-full md:max-w-[700px] lg:max-w-[1040px] overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
+                class="mx-auto w-full overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
                 
-                <div id="categoryTrack" class="flex gap-10 w-full transition-all duration-300">
+                <div id="categoryTrack" class="flex gap-3 sm:gap-6 lg:gap-10 w-full transition-all duration-300">
                     @forelse ($categories as $item)
                         <a href="{{ route('majors', ['category' => $item->slug]) }}"
-                            class="category-card bg-white rounded-2xl shadow-lg p-8 text-center w-full sm:w-[320px] flex-shrink-0 snap-start border border-gray-50"
+                            class="category-card bg-white rounded-2xl shadow-lg p-4 sm:p-8 text-center w-full min-[500px]:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-2.67rem)] flex-shrink-0 snap-start border border-gray-50 transition-all duration-300"
                             data-name="{{ strtolower($item->name) }}"
                             data-desc="{{ strtolower($item->description ?? '') }}">
-                            <div class="mb-6 text-5xl flex justify-center">
-                                <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->name }}" class="w-16 h-16 object-contain">
+                            <div class="mb-4 sm:mb-6 text-4xl sm:text-5xl flex justify-center">
+                                <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->name }}" class="w-12 sm:w-16 h-12 sm:h-16 object-contain">
                             </div>
-                            <h3 class="text-lg font-bold text-gray-800 mb-2">
+                            <h3 class="text-base sm:text-lg font-bold text-gray-800 mb-2">
                                 {{ $item->name }}
                             </h3>
-                            <p class="text-gray-600 text-sm category-desc">
+                            <p class="text-gray-600 text-xs sm:text-sm category-desc">
                                 {{ $item->description }}
                             </p>
                         </a>
@@ -52,14 +52,14 @@
                     @endforelse
 
                     <div id="noResults" class="hidden text-center text-gray-500 w-full py-10">
-                        <div class="text-5xl mb-4">🔍</div>
+                        <div class="text-4xl sm:text-5xl mb-4">🔍</div>
                         Kategori yang kamu cari tidak ditemukan.
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="categoryDots" class="flex justify-center gap-4 mt-4"></div>
+        <div id="categoryDots" class="flex justify-center gap-2 sm:gap-4 mt-4"></div>
 
     </div>
 @endsection
@@ -75,10 +75,15 @@
         .bg-primary { background-color: #3b82f6; } /* Pastikan warna primary terdefinisi */
         .category-desc {
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             word-break: break-word;
+        }
+        @media (min-width: 768px) {
+            .category-desc {
+                -webkit-line-clamp: 4;
+            }
         }
     </style>
 @endpush
@@ -95,8 +100,14 @@
             
             // Mengambil semua kartu asli
             const allCards = Array.from(document.querySelectorAll('.category-card'));
-            const perPage = 3;
             let currentPage = 0;
+
+            // Hitung perPage berdasarkan ukuran layar
+            const getPerPage = () => {
+                if (window.innerWidth < 500) return 1;
+                if (window.innerWidth < 1024) return 2;
+                return 3;
+            };
 
             // --- 1. FUNGSI FILTER ---
             const filterCards = () => {
@@ -109,7 +120,7 @@
                     
                     if (query === '' || name.includes(query) || desc.includes(query)) {
                         card.classList.remove('hidden');
-                        card.style.display = 'block';
+                        card.style.display = '';
                         matchCount++;
                     } else {
                         card.classList.add('hidden');
@@ -130,6 +141,7 @@
 
             const refreshUI = () => {
                 const visibleCards = getVisibleCards();
+                const perPage = getPerPage();
                 
                 // Atur agar kartu ke tengah jika jumlahnya sedikit
                 if (visibleCards.length <= perPage) {
@@ -145,11 +157,14 @@
             const getCardStep = () => {
                 const visible = getVisibleCards();
                 if (visible.length === 0) return 0;
-                return visible[0].offsetWidth + 40; // width + gap (gap-10 = 40px)
+                const card = visible[0];
+                const gap = window.innerWidth < 500 ? 12 : (window.innerWidth < 1024 ? 24 : 40);
+                return card.offsetWidth + gap;
             };
 
             const renderDots = () => {
                 const visibleCount = getVisibleCards().length;
+                const perPage = getPerPage();
                 const pageCount = Math.ceil(visibleCount / perPage);
                 dotsContainer.innerHTML = '';
 
@@ -157,7 +172,7 @@
 
                 for (let i = 0; i < pageCount; i++) {
                     const dot = document.createElement('button');
-                    dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === currentPage ? 'bg-primary w-8' : 'bg-gray-300'}`;
+                    dot.className = `rounded-full transition-all duration-300 ${i === currentPage ? 'bg-primary w-8 h-3' : 'bg-gray-300 w-3 h-3'}`;
                     dot.addEventListener('click', () => {
                         currentPage = i;
                         scrollToPage(i);
@@ -182,6 +197,7 @@
 
             const scrollToPage = (page) => {
                 const step = getCardStep();
+                const perPage = getPerPage();
                 viewport.scrollTo({ left: step * perPage * page, behavior: 'smooth' });
             };
 
@@ -192,6 +208,7 @@
             // Sync dots saat user scroll manual (swipe)
             viewport.addEventListener('scroll', () => {
                 const step = getCardStep();
+                const perPage = getPerPage();
                 if (step === 0) return;
                 const newPage = Math.round(viewport.scrollLeft / (step * perPage));
                 if (newPage !== currentPage) {
@@ -200,10 +217,16 @@
                 }
             });
 
-            // Efek Hover (Opsional, lebih rapi jika di JS)
+            // Efek Hover
             allCards.forEach(card => {
-                card.addEventListener('mouseenter', () => card.classList.add('-translate-y-2', 'shadow-2xl'));
-                card.addEventListener('mouseleave', () => card.classList.remove('-translate-y-2', 'shadow-2xl'));
+                card.addEventListener('mouseenter', () => card.classList.add('shadow-2xl', '-translate-y-1'));
+                card.addEventListener('mouseleave', () => card.classList.remove('shadow-2xl', '-translate-y-1'));
+            });
+
+            // Handle resize untuk responsive
+            window.addEventListener('resize', () => {
+                currentPage = 0;
+                refreshUI();
             });
 
             // Inisialisasi awal
