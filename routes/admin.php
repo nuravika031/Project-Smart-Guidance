@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin-panel')
@@ -14,4 +14,8 @@ Route::prefix('admin-panel')
 
         Route::resource('curiculums', App\Http\Controllers\Admin\CurriculumController::class);
         Route::resource('cariers', App\Http\Controllers\Admin\CareerController::class);
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
     });
