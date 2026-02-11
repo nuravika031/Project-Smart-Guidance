@@ -1,5 +1,6 @@
 <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('image/logoSmartGuidence.png') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('image/logoSmartGuidence.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

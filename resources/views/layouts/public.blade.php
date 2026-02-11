@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('image/logoSmartGuidence.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('image/logoSmartGuidence.png') }}">
     <title>Smart Guidance</title>
     @include('layouts._partials.public.styles')
     @stack("styles")
