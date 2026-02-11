@@ -1,4 +1,5 @@
 @extends('layouts.public')
+
 @section('content')
     <div class="relative overflow-hidden">
         <!-- Background Decoration -->
