@@ -2,7 +2,7 @@
 @section('content')
     <!-- ===== Header Jurusan ===== -->
     <section
-        class="bg-gradient-to-r from-primary to-blue-600 rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 text-white relative overflow-hidden"
+        class="bg-gradient-to-r from-primary to-blue-600 rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 text-white relative overflow-hidden mx-5"
     >
         <div class="absolute top-0 right-0 opacity-10">
             <svg
@@ -49,7 +49,7 @@
 
     <!-- ===== Profil Jurusan ===== -->
     <section
-        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300 mx-5"
     >
         <div class="flex items-center gap-3 mb-6">
             <div
@@ -80,7 +80,7 @@
 
     <!-- ===== Kompetensi Lulusan ===== -->
     <section
-        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300 mx-5"
     >
         <div class="flex items-center gap-3 mb-6">
             <div
@@ -201,7 +201,7 @@
 
     <!-- ===== Struktur Kurikulum ===== -->
     <section
-        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300 mx-5"
     >
         <div class="flex items-center gap-3 mb-6">
             <div
@@ -328,7 +328,7 @@
 
     <!-- ===== Durasi Studi ===== -->
     <section
-        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300 mx-5"
     >
         <div class="flex items-center gap-3 mb-6">
             <div
@@ -383,7 +383,7 @@
     </section>
 
     <!-- ===== Bidang Industri & Karir ===== -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-5">
         <!-- Bidang Industri -->
         <section
             class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
