@@ -15,11 +15,11 @@
             </a>
             <a href="{{ route('categories') }}"
                 class="px-2 py-1 rounded transition {{ request()->routeIs('categories') ? 'text-primary font-medium' : 'hover:text-primary' }}">
-                KATEGORI
+                CATEGORY
             </a>
             <a href="{{ route('majors') }}"
                 class="px-2 py-1 rounded transition {{ request()->routeIs('majors') ? 'text-primary font-medium' : 'hover:text-primary' }}">
-                JURUSAN
+                MAJOR
             </a>
         </nav>
 
@@ -45,11 +45,11 @@
             </a>
             <a href="{{ route('categories') }}"
                 class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary transition {{ request()->routeIs('categories') ? 'bg-blue-50 text-primary font-medium' : '' }}">
-                KATEGORI
+                CATEGORY
             </a>
             <a href="{{ route('majors') }}"
                 class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary transition {{ request()->routeIs('majors') ? 'bg-blue-50 text-primary font-medium' : '' }}">
-                JURUSAN
+                MAJOR
             </a>
         </div>
     </nav>
