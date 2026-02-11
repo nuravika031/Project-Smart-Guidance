@@ -168,7 +168,7 @@
                                     <!-- Jumlah Jurusan Badge -->
                                     <div
                                         class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md border border-gray-100">
-                                        <span class="text-xs font-bold text-gray-700">{{ $item->majors_count ?? 0 }}
+                                        <span class="text-xs font-bold text-gray-700">{{ $item->majors->count() ?? 0 }}
                                             Jurusan</span>
                                     </div>
                                 </div>
@@ -428,18 +428,14 @@
                 }
             });
 
-            // Efek Hover
-            allCards.forEach(card => {
-                card.addE(handled by Tailwind classes now)
-                // Additional interactions can be added here if neededHandle resize untuk responsive
-                window.addEventListener('resize', () => {
-                    currentPage = 0;
-                    refreshUI();
-                });
-
-                // Inisialisasi awal
+            // Handle resize untuk responsive
+            window.addEventListener('resize', () => {
+                currentPage = 0;
                 refreshUI();
             });
+
+            // Inisialisasi awal
+            refreshUI();
         });
     </script>
 @endpush
