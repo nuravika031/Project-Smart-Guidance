@@ -16,7 +16,7 @@
     @include('layouts._partials.public.navbar')
 
     <!-- ================= MAIN SECTION ================= -->
-    <main class="py-20">
+    <main class="py-8 sm:py-12 md:py-20 space-y-6 sm:space-y-8 md:space-y-12">
         @yield('content')
     </main>
     @stack("scripts")
