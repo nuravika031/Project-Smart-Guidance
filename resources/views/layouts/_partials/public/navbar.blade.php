@@ -89,19 +89,19 @@
                 href="{{ route('home') }}"
                 class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary transition {{ request()->routeIs('home') ? 'bg-blue-50 text-primary font-medium' : '' }}"
             >
-                HOME
+                Beranda
             </a>
             <a
                 href="{{ route('categories') }}"
                 class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary transition {{ request()->routeIs('categories') ? 'bg-blue-50 text-primary font-medium' : '' }}"
             >
-                CATEGORY
+                Kategori
             </a>
             <a
                 href="{{ route('majors') }}"
                 class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary transition {{ request()->routeIs('majors') ? 'bg-blue-50 text-primary font-medium' : '' }}"
             >
-                MAJOR
+                Jurusan
             </a>
         </div>
     </nav>
